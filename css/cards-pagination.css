@@ -1,0 +1,105 @@
+/* Ranking pager controls below the grid */
+/* —— Pagination (search-style page strip) —— */
+.cards-pagination {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 28px;
+}
+
+.cards-pagination-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
+    max-width: 100%;
+}
+
+.cards-page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.cards-page-btn {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.cards-page-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #fff;
+}
+
+.cards-page-btn:focus {
+    outline: none;
+}
+
+.cards-page-btn:focus-visible {
+    box-shadow:
+        0 0 0 2px rgba(0, 0, 0, 0.85),
+        0 0 0 4px rgba(255, 255, 255, 0.75);
+}
+
+.cards-page-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.cards-page-btn.is-current {
+    background: rgba(255, 189, 63, 0.18);
+    border-color: rgba(255, 189, 63, 0.45);
+    color: var(--accent, #ffbd3f);
+    font-weight: 700;
+    cursor: default;
+}
+
+.cards-page-prev,
+.cards-page-next {
+    min-width: auto;
+    padding: 0 16px;
+}
+
+.cards-page-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 40px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.35);
+    user-select: none;
+}
+
+.cards-pagination-meta {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    flex-basis: 100%;
+    order: 10;
+}
+
+@media (min-width: 640px) {
+    .cards-pagination-meta {
+        width: auto;
+        flex-basis: auto;
+        order: 0;
+        margin-left: 8px;
+        text-align: right;
+    }
+}

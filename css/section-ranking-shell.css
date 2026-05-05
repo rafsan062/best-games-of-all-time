@@ -1,0 +1,30 @@
+/* Full ranking section shell; #cards-grid layout superseded by game-cards.css (load order) */
+
+
+/* CARDS SECTION */
+#section-cards {
+    width: 100%;
+    padding: 64px 48px;
+}
+
+#filter-bar {
+    width: 100%;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    background: transparent;
+}
+
+#cards-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.placeholder-text {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

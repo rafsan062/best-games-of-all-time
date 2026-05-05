@@ -1,0 +1,78 @@
+/* Fixed nav revealed on scroll */
+/* STICKY BAR */
+#sticky-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 52px;
+    height: auto;
+    background-color: var(--bg-color);
+    border-bottom: none;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 64px;
+    box-sizing: border-box;
+}
+
+#sticky-bar.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.sticky-content {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 32px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.sticky-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.sticky-logo {
+    height: 24px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+}
+
+.sticky-right {
+    flex-shrink: 0;
+}
+
+.sticky-stats {
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    font-weight: 600;
+    color: var(--text-dim);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 20px;
+    white-space: nowrap;
+}
+
+.sticky-stats .separator {
+    color: var(--accent);
+    font-weight: 900;
+}

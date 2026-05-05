@@ -1,0 +1,88 @@
+/* Platform filter strip */
+.platform-header {
+    margin-bottom: 32px;
+}
+
+.accent-gold {
+    color: var(--accent);
+}
+
+.platform-header .accent-text,
+.grid-header .accent-text {
+    display: inline-block;
+    font-size: 1.6rem;
+    vertical-align: baseline;
+    padding-bottom: 4px;
+    /* Room for shadow */
+}
+
+.platform-header h2,
+.grid-header h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    font-family: var(--font-heading);
+    line-height: 1.4;
+}
+
+.accent-gold {
+    color: var(--accent);
+    margin-right: 14px;
+    /* Precise gap instead of flex gap */
+}
+
+.platform-header p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    margin: 0;
+}
+
+#platform-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.platform-pill {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.platform-pill:hover {
+    transform: translateY(-2px);
+}
+
+.platform-pill span {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.platform-bar {
+    width: 100%;
+    height: 28px;
+    border-radius: 14px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+/* Interaction States */
+.platform-pill.selected .platform-bar {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+#platform-grid.has-selection .platform-pill:not(.selected) {
+    opacity: 0.4;
+}

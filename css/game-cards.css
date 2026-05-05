@@ -1,0 +1,288 @@
+/* Flip cards: grid, face, poster, platform bar, footer */
+/* GAME CARDS COMPONENT */
+#cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    gap: 32px;
+    padding: 32px 0;
+    justify-content: center;
+}
+
+.game-card {
+    width: 280px;
+    aspect-ratio: 5 / 7;
+    perspective: 1000px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transform: translateZ(0);
+    overflow: visible;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.game-card:not(.flipped) .card-inner {
+    transform: translateY(0) scale(1) rotateY(0deg);
+}
+
+.game-card:not(.flipped):hover .card-inner {
+    transform: translateY(-15px) scale(1.04) rotateY(0deg);
+}
+
+.game-card.flipped .card-inner {
+    transform: translateY(0) scale(1) rotateY(180deg);
+}
+
+.game-card.flipped:hover .card-inner {
+    transform: translateY(-15px) scale(1.04) rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 24px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid var(--genre-color);
+    box-shadow:
+        0 12px 40px -12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+    transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-front {
+    display: flex;
+    flex-direction: column;
+}
+
+/* When a poster exists, lean a bit more on the glass layer so UI stays dominant */
+.card-front:has(.card-front-poster) {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* Poster: heavily veiled so it reads as atmosphere, not a second focal layer */
+.card-front-poster {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background-color: transparent;
+    background-image:
+        linear-gradient(
+            165deg,
+            rgba(6, 16, 16, 0.94) 0%,
+            rgba(6, 16, 16, 0.88) 32%,
+            rgba(6, 16, 16, 0.90) 55%,
+            rgba(6, 16, 16, 0.96) 100%
+        ),
+        var(--poster-img, none);
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat;
+}
+
+.card-front .card-body,
+.card-front .card-platform-bar,
+.card-front .card-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-front::after,
+.card-back::after {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+        135deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.08) 50%,
+        transparent 55%
+    );
+    transition: all 0.6s ease;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.game-card:hover .card-front::after,
+.game-card:hover .card-back::after {
+    top: -50%;
+    left: -50%;
+}
+
+.game-card:hover .card-front,
+.game-card:hover .card-back {
+    box-shadow:
+        0 30px 60px -15px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(var(--genre-color-rgb), 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-rank {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: 0.02em;
+    text-shadow:
+        0 0 1px rgba(0, 0, 0, 0.9),
+        0 1px 3px rgba(0, 0, 0, 0.85),
+        0 0 14px rgba(0, 0, 0, 0.55);
+    z-index: 3;
+}
+
+.card-year-tab {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--genre-color);
+    color: #000;
+    font-weight: 800;
+    font-size: 18px;
+    padding: 9px 21px;
+    border-radius: 0 0 0 18px;
+    z-index: 3;
+}
+
+.card-body {
+    padding: 64px 24px 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-title {
+    font-family: 'Barlow Condensed', var(--font-body);
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 16px;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+.card-title.card-title--long {
+    font-size: 28px;
+    line-height: 1.34;
+    margin-bottom: 12px;
+}
+
+.card-title.card-title--longer {
+    font-size: 21px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.card-title.card-title--extreme {
+    font-size: 16px;
+    line-height: 1.26;
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+}
+
+.card-score {
+    font-family: var(--font-pixel);
+    font-size: 48px;
+    font-weight: 900;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 4px 4px 0px var(--genre-color);
+    line-height: 1;
+}
+
+.card-platform-bar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 16px 24px;
+    width: 100%;
+}
+
+.platform-segment {
+    flex: 1;
+    height: 100%;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px 14px;
+    padding: 12px 18px 20px;
+}
+
+.card-genre-tag {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+
+/* Footer row only: share row with publisher (row flex). Do not apply % flex-basis to back-face genre. */
+.card-footer .card-genre-tag {
+    flex: 0 1 46%;
+    min-width: 0;
+    line-height: 1.35;
+}
+
+.card-genre-tag::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--genre-color);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--genre-color);
+}
+
+.card-publisher {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.42);
+    text-align: right;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    flex: 1 1 0;
+    min-width: 0;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+}

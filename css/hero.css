@@ -1,0 +1,192 @@
+/* Hero band: logo, title, stats */
+.hero-section {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: none;
+    border-bottom: none;
+    position: relative;
+}
+
+#hero {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 26px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    min-width: 0;
+    box-sizing: border-box;
+    background: radial-gradient(ellipse 80% 120% at 60% 40%, #0b2019 0%, #081a17 65%);
+    border-radius: 0;
+    /* ~20% tighter than prior hero for less vertical footprint */
+    padding: 22px 52px 26px;
+}
+
+.hero-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 19px;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.hero-right {
+    flex-shrink: 0;
+}
+
+.hero-logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+.hero-logo {
+    height: 38px;
+    width: auto;
+    display: block;
+}
+
+.hero-title-box {
+    text-align: left;
+    padding: 3px 0 5px;
+    min-width: 0;
+}
+
+.hero-title-box h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(0.92rem, 2.24vw, 2rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 1.6px;
+    color: var(--accent-red);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.accent-text {
+    font-family: var(--font-pixel);
+    color: #ffffff;
+    text-shadow: 3px 3px 0px var(--accent-red);
+    display: inline-block;
+    /* Default for sections */
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.hero-title-box .accent-text {
+    font-size: clamp(1.8rem, 8.8vw, 4.8rem);
+    display: block;
+    line-height: 1;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    text-shadow: 2.5px 2.5px 0px var(--accent-red);
+}
+
+.ranked-tag {
+    display: inline-block;
+    background-color: var(--accent);
+    color: #000;
+    padding: 4px 12px;
+    font-weight: 900;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    margin-top: 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Hero: RANKED on its own row below the h1, left-aligned with title */
+.hero-title-box .ranked-tag--hero {
+    display: inline-block;
+    margin-top: 11px;
+    margin-bottom: 2px;
+    margin-left: 0;
+    font-size: clamp(0.6rem, 1.6vw, 0.96rem);
+    padding: 3px 10px;
+    line-height: 1.1;
+    border-radius: 3px;
+    letter-spacing: 0.8px;
+}
+
+.sticky-title .accent-text {
+    font-family: var(--font-pixel);
+    font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+    text-shadow: 2px 2px 0px var(--accent-red);
+    display: inline;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.sticky-title {
+    font-family: var(--font-heading);
+    font-size: clamp(0.78rem, 1.65vw, 1rem);
+    font-weight: 900;
+    color: var(--accent-red);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    min-width: 0;
+    flex-shrink: 1;
+    line-height: 1.25;
+}
+
+.sticky-ranked {
+    margin-top: 0;
+    margin-left: 0;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    flex-shrink: 0;
+}
+
+.hero-stats-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 38px;
+}
+
+.stat-item {
+    flex: 0 0 auto;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.stat-value,
+.stat-highlight {
+    color: var(--accent);
+    font-weight: 800;
+}
+
+/* Hero stats only (hero bar scaled ~0.8×) */
+#hero .stat-value {
+    font-family: var(--font-body);
+    font-size: clamp(22px, 5.6vw, 45px);
+    display: block;
+    line-height: 1;
+}
+
+.stat-highlight {
+    font-family: inherit;
+}
+
+#hero .stat-label {
+    font-size: clamp(0.5rem, 1.08vw, 0.64rem);
+    text-transform: uppercase;
+    letter-spacing: clamp(0.4px, 0.16vw, 1.6px);
+    color: var(--text-dim);
+}

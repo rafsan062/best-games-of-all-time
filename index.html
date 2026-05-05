@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A high-fidelity redesign of Metacritic's top game rankings using D3.js and modern web standards.">
+    <title>Best Games of All Time | Metacritic Redesign</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+
+    <!-- D3.js CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Google Fonts: Inter (body + headings), Barlow Condensed for card titles, etc. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400..700;1,400..700&family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External Styles (order preserves cascade from original style.css + cards.css) -->
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/sticky-bar.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/floating-info.css">
+    <link rel="stylesheet" href="css/section-ranking-shell.css">
+    <link rel="stylesheet" href="css/details-panel.css">
+    <link rel="stylesheet" href="css/platforms.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/dashboard-shell.css">
+    <link rel="stylesheet" href="css/game-cards.css">
+    <link rel="stylesheet" href="css/game-card-back.css">
+    <link rel="stylesheet" href="css/cards-pagination.css">
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="hero-section">
+        <div id="hero">
+            <div class="hero-left">
+                <div class="hero-logo-box">
+                    <img src="assets/Metacritic_logo_w.svg" alt="Metacritic Logo" class="hero-logo">
+                </div>
+                <div class="hero-title-box">
+                    <h1>Best <span class="accent-text">Games</span> of All Time</h1>
+                    <div class="ranked-tag ranked-tag--hero">RANKED</div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-stats-box">
+                    <div class="stat-item">
+                        <span class="stat-value">384</span>
+                        <span class="stat-label">Games Ranked</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">9</span>
+                        <span class="stat-label">Genres</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">40+</span>
+                        <span class="stat-label">Years of Gaming History</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-charts">
+            <div id="chart-left"></div>
+            <div id="chart-right"></div>
+        </div>
+    </header>
+
+    <!-- STICKY BAR -->
+    <nav id="sticky-bar">
+        <div class="sticky-content">
+            <div class="sticky-left">
+                <img src="assets/Metacritic_logo_w.svg" alt="Metacritic Logo" class="sticky-logo">
+                <div class="sticky-title">
+                    Best <span class="accent-text">Games</span> of All Time
+                    <span class="ranked-tag sticky-ranked">RANKED</span>
+                </div>
+            </div>
+            <div class="sticky-right">
+                <div class="sticky-stats">
+                    <span><span class="stat-highlight">384</span> Games Ranked</span>
+                    <span class="separator">·</span>
+                    <span><span class="stat-highlight">9</span> Genres</span>
+                    <span class="separator">·</span>
+                    <span><span class="stat-highlight">40+</span> Years of Gaming History</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-body">
+
+    <!-- PLATFORMS SECTION -->
+    <section id="section-platforms" class="content-panel">
+        <div class="platform-header">
+            <h2><span class="accent-gold">Filter by</span> <span class="accent-text">Platform</span></h2>
+            <p>Select a platform to filter games · Click again to deselect</p>
+        </div>
+        <div id="platform-grid">
+            <!-- Platform pills will be injected here -->
+        </div>
+    </section>
+
+    <!-- CARDS SECTION -->
+    <section id="section-cards" class="content-panel">
+        <div class="grid-header">
+            <h2><span class="accent-gold">The Full</span> <span class="accent-text">Ranking</span></h2>
+            <p>Every game with a 90+ Metascore, ranked by the critics.</p>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div id="filter-bar">
+            <div class="filter-controls">
+                <!-- Genre Dropdown -->
+                <div class="custom-dropdown" id="genre-dropdown">
+                    <button class="dropdown-pill" id="genre-pill">
+                        <span class="pill-label">All Genres</span>
+                        <svg class="pill-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z" fill="currentColor"/></svg>
+                    </button>
+                    <div class="dropdown-panel" id="genre-panel"></div>
+                </div>
+
+                <!-- Decade Dropdown -->
+                <div class="custom-dropdown" id="decade-dropdown">
+                    <button class="dropdown-pill" id="decade-pill" type="button">
+                        <span class="pill-label">All Decades</span>
+                        <svg class="pill-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z" fill="currentColor"/></svg>
+                    </button>
+                    <div class="dropdown-panel" id="decade-panel"></div>
+                </div>
+
+                <!-- Sort Dropdown -->
+                <div class="custom-dropdown" id="sort-dropdown">
+                    <button class="dropdown-pill" id="sort-pill">
+                        <span class="pill-label">Highest Score</span>
+                        <svg class="pill-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z" fill="currentColor"/></svg>
+                    </button>
+                    <div class="dropdown-panel" id="sort-panel"></div>
+                </div>
+
+                <!-- Search Box -->
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" id="game-search" placeholder="Search games..." autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div id="cards-grid">
+            <!-- Game cards will be injected by js/cards.js (via dashboard refresh) -->
+        </div>
+        <nav id="cards-pagination" class="cards-pagination" aria-label="Ranking pages"></nav>
+    </section>
+</main>
+
+    <!-- External Logic (order matters: deps → features → entry) -->
+    <script src="js/constants.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/details-panel.js"></script>
+    <script src="js/chart-genre-pie.js"></script>
+    <script src="js/chart-decade-bar.js"></script>
+    <script src="js/platforms.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- FLOATING INFO BUTTON -->
+    <button id="floating-info-btn" title="Project Information">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <path d="M12 8h.01" />
+        </svg>
+    </button>
+
+    <!-- PANEL OVERLAY -->
+    <div id="panel-overlay" class="panel-overlay"></div>
+
+    <!-- DETAILS PANEL (DRAWER) -->
+    <div id="details-panel" class="side-panel">
+        <div class="panel-header">
+            <h3 id="panel-title">Category Details</h3>
+            <button class="panel-close">&times;</button>
+        </div>
+        <div class="panel-body">
+            <div id="panel-list" class="games-list">
+                <!-- Top games will be injected here -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+/* Main column wrapper and padded panels shared by platforms + ranking */
+/* DASHBOARD BODY & PANEL SYSTEM */
+.dashboard-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 18px 48px 18px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.content-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+}
+
+/* Flip cards + pagination: game-cards.css, game-card-back.css, cards-pagination.css */

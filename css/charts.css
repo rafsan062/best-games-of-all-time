@@ -1,0 +1,105 @@
+/* Chart row containers, titles, legend, tooltips */
+#section-charts {
+    width: 100%;
+    padding: 0 18px;
+    margin: 28px 0 20px;
+    display: flex;
+    flex-direction: row;
+    /* Side by side by default */
+    flex-wrap: wrap;
+    /* Wrap when narrow */
+    gap: 20px;
+}
+
+#chart-left,
+#chart-right {
+    flex: 1 1 500px;
+}
+
+#chart-left,
+#chart-right {
+    min-height: 450px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+#chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 24px;
+    /* Row gap vs Column gap */
+    margin-top: 24px;
+    width: 100%;
+    max-width: 650px;
+    /* Constrained to force 5 items on row 1 */
+    padding: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dim);
+}
+
+.legend-color {
+    width: 18px;
+    height: 10px;
+    border-radius: 2px;
+    /* Subtle roundness for a premium look */
+}
+
+.chart-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: var(--accent);
+    /* Restored to Metacritic Gold */
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
+
+.chart-title .accent-text {
+    font-family: var(--font-pixel);
+    color: #ffffff;
+    text-shadow: 2px 2px 0px var(--accent-red);
+    text-transform: uppercase;
+    font-size: 1.2em;
+    display: inline;
+    margin: 0 4px;
+}
+
+/* TOOLTIP STYLES */
+.chart-tooltip {
+    position: absolute;
+    padding: 12px;
+    background: rgba(13, 43, 39, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 3000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    line-height: 1.4;
+}
+
+.tooltip-title {
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+    display: block;
+}
